@@ -35,3 +35,8 @@ Authentication: JWT or OAuth for secure user login
 Hosting: AWS or Vercel for deployment
 
 Why This Project: The idea for ZENMATICE emerged from the common challenge of uncertainty about which workouts to do and how to plan them effectively. This app aims to simplify the decision-making process, empowering users to focus on their fitness journey with confidence and efficiency. By pre-planning workouts, users can save time and maintain consistency in their fitness routines.
+
+
+
+
+render link:https://s85-zen-metrices.onrender.com
