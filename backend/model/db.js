@@ -12,5 +12,11 @@ const userSchemas = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 })
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 229f183 (done)
 const User=mongoose.model('User',userSchemas)
 module.exports=User
