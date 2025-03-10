@@ -4,12 +4,16 @@
   "description": "**Project Title: ZENMATICE (Fitness App) ** Project Overview: ZENMATICE is a fitness application designed to help users identify and plan workouts tailored to their individual needs and preferences. The app guides users through selecting suitable training programs based on their goals and circumstances.",
   "main": "index.js",
   "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "i": "^0.3.7"
+    "dotenv": "^16.4.7",
+    "i": "^0.3.7",
+    "mongoose": "^8.12.1"
   }
 }
