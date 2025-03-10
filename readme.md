@@ -40,3 +40,4 @@ Why This Project: The idea for ZENMATICE emerged from the common challenge of un
 
 
 render link:https://s85-zen-metrices.onrender.com
+cloudfare link:https://zenmetrice.pages.dev/
