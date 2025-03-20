@@ -1,29 +1,27 @@
-require("dotenv").config({ path: ".env" });
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
+const connectDB = require("./model/db"); // Import MongoDB connection file
+const Workout = require("./schema"); // Import Workout model
+
 const app = express();
-const User = require('./model/db');
-const PORT = process.env.PORT || 5000;
+
+// Connect to MongoDB
+connectDB();
+
+app.use(cors());
 app.use(express.json());
-// app.use(cors());
-app.get("/ping", (req, res) => {
-    res.send("pong");
+
+// API Route to Fetch Workouts
+app.get("/api/workouts", async (req, res) => {
+  try {
+    const workouts = await Workout.find(); // Fetch all workouts from MongoDB
+    res.json(workouts);
+  } catch (error) {
+    console.error("Error fetching workouts:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
 });
 
-app.post('/create',async (req,res)=>{
-    const {name,email,age,weight,height,gender,fitnessGoals} = req.body;
-    const createUser = await User.create({
-        name,
-        email,
-        age,
-        weight,
-        height,
-        gender,
-        fitnessGoals
-    });
-    res.send(createUser);
-})
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
