@@ -1,22 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+// import axios from "axios";
 
-const WorkoutCard = () => {
-  // Dummy Data
-  const workout = {
-    name: "Full Body HIIT",
-    duration: "30 Minutes",
-    category: "HIIT",
-    equipment: "Bodyweight Only"
-  };
+const WorkoutsList = () => {
+    const [workouts, setWorkouts] = useState([]);
 
-  return (
-    <div className="border p-4 shadow-lg rounded-md bg-white w-64 text-center">
-      <h2 className="text-xl font-bold text-gray-800">{workout.name}</h2>
-      <p className="text-gray-600">Duration: {workout.duration}</p>
-      <p className="text-gray-600">Category: {workout.category}</p>
-      <p className="text-gray-600">Equipment: {workout.equipment}</p>
-    </div>
-  );
+    useEffect(() => {
+      fetch("http://localhost:5000/api/workouts")
+        .then((res) => res.json())
+        .then((data) => setWorkouts(data))
+        .catch((err) => console.error("Error fetching workouts:", err));
+    }, []);
+    
+
+    return (
+        <div>
+            <h2>Workouts List</h2>
+          
+                <ol>
+                    {workouts.map((workout) => (
+                        <li key={workout._id}>
+                            <h3>{workout.name}</h3>
+                            <p>Category: {workout.category}</p>
+                            <p>Duration: {workout.duration} minutes</p>
+                            <p>Equipment: {workout.equipment}</p>
+                        </li>
+                    ))}
+                </ol>
+           
+        </div>
+    );
 };
 
-export default WorkoutCard;
+export default WorkoutsList;

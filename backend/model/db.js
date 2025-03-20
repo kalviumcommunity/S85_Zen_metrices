@@ -1,14 +1,16 @@
 const mongoose = require("mongoose");
 
-const mongoURI = process.env.MONGO_URI;
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect("mongodb://127.0.0.1:27017/zenmatice", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+    process.exit(1); // Exit process if MongoDB connection fails
+  }
+};
 
-if (!mongoURI) {
-    throw new Error("MONGO_URI is not defined in .env file");
-}
-
-mongoose
-  .connect(mongoURI) // No need for options in Mongoose 7+
-  .then(() => console.log("✅ MongoDB connected successfully"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
-
-module.exports = mongoose;
+module.exports = connectDB;
