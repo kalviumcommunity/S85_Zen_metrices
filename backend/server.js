@@ -22,6 +22,18 @@ app.get("/api/workouts", async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+app.post("/api/workouts", async (req, res) => {
+  try {
+    const { name, category, duration, equipment, difficulty, createdBy = "Anonymous" } = req.body;
+
+    const newWorkout = new Workout({ name, category, duration, equipment, difficulty, createdBy });
+    await newWorkout.save();
+    res.status(201).json(newWorkout);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

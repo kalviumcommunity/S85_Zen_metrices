@@ -1,5 +1,6 @@
 import React from "react";
-import WorkoutCard from "./WorkoutCard"; // Import WorkoutCard component
+import WorkoutCard from "./WorkoutCard"; // Import WorkoutCard component\
+import AddWorkout from "../AddWorkout";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <p>Start your fitness journey with customized workouts and expert guidance.</p>
       </div>
         <WorkoutCard/>
+        <AddWorkout />
 
     </>
   );
