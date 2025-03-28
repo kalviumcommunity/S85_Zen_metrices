@@ -1,16 +1,16 @@
-/* Center everything */
-.app-container {
+/* Center Everything */
+.workout-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center horizontally */
-  justify-content: center; /* Center vertically */
-  text-align: center;
+  align-items: center; /* Horizontally center */
+  justify-content: center; /* Vertically center */
   min-height: 100vh; /* Full viewport height */
+  text-align: center;
 }
 
 /* Title Styling */
-h1 {
-  font-size: 3rem;
+.workout-title {
+  font-size: 2.5rem;
   color: #4CAF50;
   margin-bottom: 20px;
 }
@@ -19,8 +19,9 @@ h1 {
 .workout-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Center all workout cards */
   gap: 20px;
+  width: 100%;
 }
 
 /* Workout Box */

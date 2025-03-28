@@ -1,25 +1,18 @@
 import React from "react";
-import WorkoutCard from "./WorkoutCard"; // Import WorkoutCard component\
+import WorkoutCard from "./WorkoutCard";
 import AddWorkout from "../AddWorkout";
+import "./App.css";
 
 function App() {
-
   return (
-    <>
-    
-    
-    
-    
+    <div className="app-container">
       <h1>Welcome to ZENMATICE</h1>
-      <div>
-
       <p>Your personalized fitness assistant for smarter workouts!</p>
       <p>Start your fitness journey with customized workouts and expert guidance.</p>
-      </div>
-        <WorkoutCard/>
-        <AddWorkout />
-
-    </>
+      
+      <WorkoutCard />
+      <AddWorkout />
+    </div>
   );
 }
 
