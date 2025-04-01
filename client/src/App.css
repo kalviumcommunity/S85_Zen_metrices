@@ -1,35 +1,25 @@
-/* Center everything */
+/* App.css */
 .app-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center horizontally */
-  justify-content: center; /* Center vertically */
-  text-align: center;
-  min-height: 100vh; /* Full viewport height */
-}
-
-/* Title Styling */
-h1 {
-  font-size: 3rem;
-  color: #4CAF50;
-  margin-bottom: 20px;
-}
-
-/* Workout List Container */
-.workout-list {
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
+  min-height: 100vh; /* Ensure the container takes full height of the viewport */
+  text-align: center; /* Center the text */
+  padding: 20px;
 }
 
-/* Workout Box */
-.workout-box {
-  background: #1e1e1e;
-  padding: 20px;
-  border-radius: 10px;
-  width: 400px;
-  text-align: left;
-  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-  border: 2px solid #4CAF50;
+.add-workout-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.add-workout-btn:hover {
+  background-color: #45a049;
 }
