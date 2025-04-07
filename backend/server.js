@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const connectDB = require("./model/db"); // MongoDB connection file
 const Workout = require("./schema"); // Workout Model
+const { workoutValidationSchema } = require("./model/validations/validation");
+
 
 const app = express();
 
@@ -25,6 +27,9 @@ app.get("/api/workouts", async (req, res) => {
 
 // Create New Workout
 app.post("/api/workouts", async (req, res) => {
+  const { error } = workoutValidationSchema.validate(req.body);
+  if (error) return res.status(400).json({ message: error.details[0].message });
+
   try {
     const { name, category, duration, equipment, difficulty, createdBy = "Anonymous" } = req.body;
     const newWorkout = new Workout({ name, category, duration, equipment, difficulty, createdBy });
@@ -35,8 +40,12 @@ app.post("/api/workouts", async (req, res) => {
   }
 });
 
+
 // Update Workout by ID
 app.put("/api/workouts/:id", async (req, res) => {
+  const { error } = workoutValidationSchema.validate(req.body);
+  if (error) return res.status(400).json({ message: error.details[0].message });
+
   try {
     const { name, category, duration, equipment, difficulty, createdBy } = req.body;
 
@@ -56,6 +65,7 @@ app.put("/api/workouts/:id", async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+
 
 // Delete Workout by ID
 app.delete("/api/workouts/:id", async (req, res) => {
