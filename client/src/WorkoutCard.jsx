@@ -22,7 +22,7 @@ const WorkoutsList = () => {
       console.error("Error deleting workout:", error);
     }
   };
-
+ 
   return (
     <div className="workout-container">
       <h2 className="workout-title">Workouts List</h2>
