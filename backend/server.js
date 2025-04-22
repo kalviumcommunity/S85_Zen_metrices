@@ -6,6 +6,10 @@ const connectDB = require("./model/db"); // MongoDB connection
 const Workout = require("./schema");     // Workout Model
 const User = require("./model/user");    // User Model
 const { workoutValidationSchema } = require("./validations/validation");
+const cookieParser = require("cookie-parser");
+const authRoutes = require("./routes/auth");
+
+
 
 const app = express();
 app.use(express.json()); // must be before the POST routes
@@ -14,6 +18,8 @@ app.use(express.json()); // must be before the POST routes
 connectDB();
 
 app.use(cors());
+app.use(cookieParser());
+app.use("/api/auth", authRoutes);
 
 
 /** ---------------------------
