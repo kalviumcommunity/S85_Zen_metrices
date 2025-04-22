@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AddWorkout = ({ onWorkoutAdded }) => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [duration, setDuration] = useState("");
   const [equipment, setEquipment] = useState("");
+  const [createdBy, setCreatedBy] = useState(""); // 🆕 New state for user ID
+  const [users, setUsers] = useState([]); // 🆕 All users for dropdown
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+
+  // 🆕 Fetch users for the dropdown
+  useEffect(() => {
+    fetch("http://localhost:5000/api/users")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Fetched users:", data); // 👈 check this in browser console
+        setUsers(data);
+      })
+      .catch((err) => console.error("Failed to load users", err));
+  }, []);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,11 +32,17 @@ const AddWorkout = ({ onWorkoutAdded }) => {
       return;
     }
 
+    if (!createdBy) {
+      setError("Please select a user.");
+      return;
+    }
+
     const newWorkout = {
       name,
       category,
-      duration: parseInt(duration), // Ensure it's a valid number
+      duration: parseInt(duration, 10),
       equipment,
+      createdBy, // 🆕 Send the selected user's ID
     };
 
     setLoading(true);
@@ -35,20 +56,23 @@ const AddWorkout = ({ onWorkoutAdded }) => {
         body: JSON.stringify(newWorkout),
       });
 
-      if (!res.ok) throw new Error("Failed to add workout");
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.message || "Failed to add workout");
+      }
 
-      const data = await res.json();
-      console.log("Workout added successfully:", data);
-
+      await res.json();
       setSuccessMessage("Workout added successfully!");
-      onWorkoutAdded(); // 🔥 Call the refresh function
+      onWorkoutAdded?.();
+
+      // Clear form
       setName("");
       setCategory("");
       setDuration("");
       setEquipment("");
-    } catch (error) {
-      console.error("Error adding workout:", error);
-      setError("Failed to add workout. Please try again.");
+      setCreatedBy("");
+    } catch (err) {
+      setError(err.message || "Failed to add workout. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -88,6 +112,21 @@ const AddWorkout = ({ onWorkoutAdded }) => {
           onChange={(e) => setEquipment(e.target.value)}
           required
         />
+
+        {/* 🆕 Created By Dropdown */}
+        <select
+          value={createdBy}
+          onChange={(e) => setCreatedBy(e.target.value)}
+          required
+        >
+          <option value="">Select a User</option>
+          {users.map((user) => (
+            <option key={user._id} value={user._id}>
+              {user.name}
+            </option>
+          ))}
+        </select>
+
         <button type="submit" disabled={loading}>
           {loading ? "Adding..." : "Add Workout"}
         </button>

@@ -5,10 +5,9 @@ const workoutSchema = new mongoose.Schema({
   category: { type: String, required: true },
   duration: { type: Number, required: true },
   equipment: { type: String },
-  difficulty: { type: String, required: true },
-  createdBy: { type: String, required: false, default: "Anonymous" } // 👈 Default value
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+ // ✅ Reference to User model
 });
-
 
 const Workout = mongoose.model("Workout", workoutSchema);
 
