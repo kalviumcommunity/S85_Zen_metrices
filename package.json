@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "i": "^0.3.7",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.12.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.4.1",
